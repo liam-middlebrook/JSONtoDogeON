@@ -1,7 +1,6 @@
 #!/usr/bin/python
 #dogeON.py
 #A JSON parser that converts JSON strings to DogeON
-
 import sys
 
 jsonFile = sys.argv[1]
@@ -26,6 +25,15 @@ def parse(jsonString):
                 return parse(jsonString)
             if char == ':':
                 jsonString = jsonString[:i] + " is "+ jsonString[i+1:]
+                return parse(jsonString)
+            if char == '[':
+                jsonString = jsonString[:i] + " so "+ jsonString[i+1:]
+                return parse(jsonString)
+            if char == ',':
+                jsonString = jsonString[:i] + " next "+ jsonString[i+1:]
+                return parse(jsonString)
+            if char == ']':
+                jsonString = jsonString[:i] + " many "+ jsonString[i+1:]
                 return parse(jsonString)
     return jsonString
 
