@@ -3,16 +3,8 @@
 #A JSON parser that converts JSON strings to DogeON
 import sys
 
-jsonFile = sys.argv[1]
 
-#retrieve the JSON data from specified file
-with open (jsonFile, "r") as myfile:
-    jsonString=myfile.read().replace('\n', '')
-
-inQuotes = False
-
-def parse(jsonString):
-    inQuotes = False
+def parse(jsonString, inQuotes=False):
     for i, char in enumerate(jsonString):
         if char == '\"':
             inQuotes = not inQuotes
@@ -37,6 +29,8 @@ def parse(jsonString):
                 return parse(jsonString)
     return jsonString
 
-jsonString = parse(jsonString)
-print jsonString
-            
+
+if __name__ == '__main__':
+    inQuotes = False
+    with open(sys.argv[1], "r") as myfile:
+        print parse(myfile.read().replace('\n', ''), inQuotes)
